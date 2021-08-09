@@ -1,26 +1,27 @@
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
+const bcrypt = require('bcrypt');
 const moment = require('moment');
 const dotenv = require('dotenv');
 dotenv.config();
 const User = require('../models/User');
+
 module.exports = function (passport) {
   // Local
   passport.use(
     new LocalStrategy(async (username, password, done) => {
-      const userObject = new User({
-        email: username,
-        provider: 'local',
-        password,
-      });
       try {
         const user = await User.findOne({ email: username });
         if (user) {
-          return done(null, user);
+          const isPassMatched = await comparePassword({
+            password,
+            hash: user.password,
+          });
+          if (isPassMatched) return done(null, user);
         }
-        await userObject.save();
-        return done(null, userObject);
+        done(null, false);
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +40,7 @@ module.exports = function (passport) {
         const userObject = new User({
           id: profile.id,
           name: profile.displayName,
-          provider: 'google',
+          provider: profile.provider,
           profile_img: profile.photos[0].value,
         });
         try {
@@ -67,7 +68,37 @@ module.exports = function (passport) {
         const userObject = new User({
           id: profile.id,
           name: profile.username,
-          provider: 'github',
+          provider: profile.provider,
+          profile_img: profile.photos[0].value,
+        });
+        try {
+          const user = await User.findOne({ id: profile.id });
+          if (user) {
+            return done(null, user);
+          }
+          await userObject.save();
+          return done(null, userObject);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    )
+  );
+
+  // Twitter
+  passport.use(
+    new TwitterStrategy(
+      {
+        consumerKey: process.env.TWITTER_CONSUMER_KEY,
+        consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+        callbackURL: '/auth/twitter/callback',
+      },
+      async (token, tokenSecret, profile, done) => {
+        console.log(profile.id);
+        const userObject = new User({
+          id: profile.id,
+          name: profile.displayName,
+          provider: profile.provider,
           profile_img: profile.photos[0].value,
         });
         try {
@@ -97,7 +128,14 @@ module.exports = function (passport) {
       { lastLogin: moment().format('MM/DD/HH:mm') }
     ).select('-password');
     // Always get current last login
-    user.lastLogin = moment().format('MM/DD/HH:mm');
+    if (user) {
+      user.lastLogin = moment().format('MM/DD/HH:mm');
+    }
     done(null, user);
   });
+};
+
+const comparePassword = async ({ password, hash }) => {
+  const result = await bcrypt.compare(password, hash);
+  return result;
 };

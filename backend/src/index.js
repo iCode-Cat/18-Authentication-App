@@ -30,6 +30,7 @@ app.use('/api/user/profile', require('./routes/api/profile'));
 app.use('/auth/local', require('./routes/api/localAuth'));
 app.use('/auth/google', require('./routes/api/googleAuth'));
 app.use('/auth/github', require('./routes/api/githubAuth'));
+app.use('/auth/twitter', require('./routes/api/twitterAuth'));
 
 // Server settings
 const PORT = process.env.PORT || 4000;
