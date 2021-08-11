@@ -13,7 +13,7 @@ router.get(
   passport.authenticate('github', { failureRedirect: '/login', session: true }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('http://localhost:3000/profile');
   }
 );
 

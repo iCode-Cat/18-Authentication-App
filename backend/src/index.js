@@ -36,5 +36,5 @@ app.use('/auth/github', require('./routes/api/githubAuth'));
 app.use('/auth/twitter', require('./routes/api/twitterAuth'));
 
 // Server settings
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));

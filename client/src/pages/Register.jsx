@@ -12,7 +12,7 @@ const Register = () => {
 
     try {
       const post = await axios.post(
-        'http://localhost:4000/auth/local/register',
+        'http://localhost:3001/auth/local/register',
         {
           username: email,
           password,
@@ -76,10 +76,10 @@ const Register = () => {
 
       <p className={style.desc_small}>or continue with these social profile</p>
       <div className={style.icons}>
-        <i class='fab fa-google'></i>
-        <i class='fab fa-facebook-square'></i>
-        <i class='fab fa-twitter'></i>
-        <i class='fab fa-github'></i>
+        <i className='fab fa-google'></i>
+        <i className='fab fa-facebook-square'></i>
+        <i className='fab fa-twitter'></i>
+        <i className='fab fa-github'></i>
       </div>
       <p className={style.desc_small}>
         Adready a member?
