@@ -13,7 +13,7 @@ require('../config/passport')(passport);
 // Routes
 
 // Middleware settings
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 // Session
 app.use(
@@ -21,6 +21,9 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    },
   })
 );
 app.use(passport.initialize());
@@ -34,4 +37,4 @@ app.use('/auth/twitter', require('./routes/api/twitterAuth'));
 
 // Server settings
 const PORT = process.env.PORT || 4000;
-app.listen(3001, () => console.log(`Server started on ${PORT}`));
+app.listen(PORT, () => console.log(`Server started on ${PORT}`));

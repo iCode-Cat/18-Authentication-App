@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 const User = require('../../../models/User');
 
@@ -20,6 +20,7 @@ router.post('/login', (req, res, next) => {
 
 router.post('/register', async (req, res) => {
   const { username, password } = req.body;
+  console.log(username, password);
   const userObject = new User({
     email: username,
     provider: 'local',

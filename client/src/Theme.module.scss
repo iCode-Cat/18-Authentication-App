@@ -1,16 +1,22 @@
 :root {
   --bg-color: #fff;
-  --text-color: #000;
+  --text-color: #333;
 }
 
 [data-theme='dark'] {
-  --bg-color: #000;
+  --bg-color: #252329;
   --text-color: #fff;
 }
 
+.root {
+  background: var(--bg-color);
+}
 .wrapper {
+  display: flex;
+  justify-content: center;
   font-family: sans-serif;
-  text-align: center;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  min-height: 100vh;
+  padding: 1.7rem 1.8rem;
+  max-width: 1440px;
+  margin: 0 auto;
 }
