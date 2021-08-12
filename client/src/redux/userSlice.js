@@ -3,14 +3,18 @@ import axios from 'axios';
 
 const initialState = {
   user: null,
-  isAuthenticated: false,
+  isAuthenticated: null,
 };
 
 export const fetchUser = createAsyncThunk('api/user/profile', async () => {
-  const fetch = await axios.get('http://localhost:3001/api/user/profile', {
-    withCredentials: true,
-  });
-  return fetch.data;
+  try {
+    const fetch = await axios.get('http://localhost:3001/api/user/profile', {
+      withCredentials: true,
+    });
+    return fetch.data;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export const userSlice = createSlice({
@@ -21,6 +25,10 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.fulfilled, (state, action) => {
+      if (action.payload === undefined) {
+        state.isAuthenticated = false;
+        return;
+      }
       state.user = action.payload;
       state.isAuthenticated = true;
     });
