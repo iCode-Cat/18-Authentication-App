@@ -1,0 +1,11 @@
+.wrapper {
+  background: red;
+  width: 100%;
+}
+
+.header {
+  grid-auto-flow: column;
+  justify-content: space-between;
+  background: blue;
+  display: grid;
+}

@@ -46,8 +46,7 @@ function App() {
                 isAuthenticated={isAuthenticated}
               />
               <Route path='*'>
-                {' '}
-                <Redirect to='/login' />{' '}
+                <Redirect to='/login' />
               </Route>
             </Switch>
           </article>
