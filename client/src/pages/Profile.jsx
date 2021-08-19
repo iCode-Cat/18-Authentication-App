@@ -34,16 +34,17 @@ const Profile = () => {
       <section className={style.wrapper}>
         <h1 className={style.title}>Personal info</h1>
         <p className={style.sub_title}>Basic info, like your name and photo</p>
-        <section className={style.profile_container}>
+        <section className={style.profile}>
           <section className={style.columnBox}>
             <p className={style.profile_title}>Profile</p>
             <p className={style.profile_subTitle}>
-              Some info may be visible to other people
+              Some info may be visible to <br /> other people
             </p>
             <button className={style.button}>Edit</button>
           </section>
           {profile.map((user, index) => (
             <section key={index} className={style.columnBox}>
+              <p>HELLO</p>
               {user.value}
             </section>
           ))}

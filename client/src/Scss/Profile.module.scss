@@ -1,5 +1,4 @@
 .wrapper {
-  background: green;
 }
 
 .title,
@@ -15,4 +14,36 @@
 .sub_title {
   font-size: 1.4rem;
   font-weight: 300;
+}
+
+.profile {
+  margin-top: 4rem;
+  .columnBox {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: flex-start;
+    justify-content: space-between;
+    background: red;
+  }
+  &_title {
+    font-weight: 400;
+    font-size: 2.2rem;
+  }
+  &_subTitle {
+    font-weight: 300;
+    grid-column: 1/3;
+  }
+  button {
+    grid-row: 1/3;
+    grid-column: 2/3;
+  }
+}
+
+@media (min-width: 50em) {
+  .title {
+    font-size: 3.6rem;
+  }
+  .sub_title {
+    font-size: 1.8rem;
+  }
 }
