@@ -4,7 +4,10 @@ import { useSelector } from 'react-redux';
 
 const Layout = (props) => {
   const state = useSelector((state) => state.user.user);
-  const profileImage = state.profile_img;
+  console.log(state.profile_img);
+  const profileImage =
+    state.profile_img ||
+    'https://www.pngarea.com/pngm/676/4747761_default-image-png-default-profile-picture-transparent-hd.png';
   const profileName = state.name;
   return (
     <section className={style.wrapper}>

@@ -9,7 +9,9 @@ const Profile = () => {
   const [profile, setProfile] = useState([
     {
       field: 'PHOTO',
-      value: profile_img,
+      value:
+        profile_img ||
+        'https://www.pngarea.com/pngm/676/4747761_default-image-png-default-profile-picture-transparent-hd.png',
     },
     {
       field: 'NAME',
@@ -28,6 +30,10 @@ const Profile = () => {
       field: 'EMAIL',
       value: email || 'Empty',
     },
+    {
+      field: 'PASSWORD',
+      value: '**********',
+    },
   ]);
   return (
     <Layout>
@@ -43,9 +49,22 @@ const Profile = () => {
             <button className={style.button}>Edit</button>
           </section>
           {profile.map((user, index) => (
-            <section key={index} className={style.columnBox}>
-              <p>HELLO</p>
-              {user.value}
+            <section
+              key={index}
+              className={`${style.item} ${index === 0 && style.borderTop}`}
+            >
+              <div className={style.columnBox}>
+                <p className={style.loop_field}>{user.field}</p>
+                {index === 0 ? (
+                  <img
+                    className={style.loop_image}
+                    src={user.value}
+                    alt='profile'
+                  />
+                ) : (
+                  <p className={style.loop_value}>{user.value}</p>
+                )}
+              </div>
             </section>
           ))}
         </section>
