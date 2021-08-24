@@ -32,7 +32,7 @@ const Profile = () => {
     },
     {
       field: 'PASSWORD',
-      value: '**********',
+      value: '***********',
     },
   ]);
   return (
