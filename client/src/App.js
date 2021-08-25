@@ -36,11 +36,13 @@ function App() {
               <Route path='/register' component={Register} />
               <Route path='/login' component={Login} />
               <ProtectedRoute
+                exact
                 path='/profile'
                 component={Profile}
                 isAuthenticated={isAuthenticated}
               />
               <ProtectedRoute
+                exact
                 path='/profile/edit'
                 component={EditProfile}
                 isAuthenticated={isAuthenticated}

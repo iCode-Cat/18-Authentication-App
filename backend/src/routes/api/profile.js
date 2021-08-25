@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
   }
   try {
     const { _id } = req.user;
+    // Update with the given credentials
     const object = {
       name: 'JUJU',
       phone: 121212,
@@ -30,7 +31,6 @@ router.post('/', async (req, res) => {
     // Find user by userid
     const user = await User.updateOne({ _id }, { ...object });
     res.status(200).send('User Profile Updated Successfully');
-    // Update with the given credentials
   } catch (error) {
     console.log(error.message);
     res.status(500).send('Server Error');

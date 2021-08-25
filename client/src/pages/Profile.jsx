@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import style from '../Scss/Profile.module.scss';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const userState = useSelector((state) => state.user.user);
@@ -46,7 +47,9 @@ const Profile = () => {
             <p className={style.profile_subTitle}>
               Some info may be visible to <br /> other people
             </p>
-            <button className={style.button}>Edit</button>
+            <Link to='/profile/edit'>
+              <button className={style.button}>Edit</button>
+            </Link>
           </section>
           {profile.map((user, index) => (
             <section

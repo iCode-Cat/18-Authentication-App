@@ -3,10 +3,11 @@
 }
 
 .header {
-  grid-template-columns: 1fr auto auto auto;
+  grid-template-columns: 1fr auto;
   justify-content: space-between;
   align-items: center;
   display: grid;
+  position: relative;
   gap: 16px;
 }
 
@@ -17,14 +18,26 @@
 .profile {
   max-width: 32px;
   border-radius: 8px;
+  cursor: pointer;
   &_name,
   &_icon {
     display: none;
-    cursor: pointer;
   }
 }
 
-@media (min-width: 30em) {
+// .menu {
+//   display: grid;
+//   grid-auto-flow: column;
+//   align-items: center;
+//   justify-items: flex-end;
+//   justify-content: center;
+//   gap: 1.1rem;
+// }
+
+@media (min-width: 50em) {
+  .header {
+    grid-template-columns: 1fr auto auto auto;
+  }
   .profile {
     &_name,
     &_icon {
