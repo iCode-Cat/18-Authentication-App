@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: grid;
@@ -31,14 +33,30 @@ const Option = styled.a`
 `;
 
 const SessionPopup = () => {
+  const history = useHistory();
+  const logout = async () => {
+    try {
+      const get = await axios.get(
+        'http://localhost:3001/api/user/profile/logout',
+        { withCredentials: true }
+      );
+      // After successfully logout, redirect to auth page.
+      history.push('/');
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <Wrapper>
-      <Option href='/profile'>
-        <span className='material-icons'>account_circle</span>
-        <p>My Profile</p>
-      </Option>
+      <Link to='/profile'>
+        <Option>
+          <span className='material-icons'>account_circle</span>
+          <p>My Profile</p>
+        </Option>
+      </Link>
       <hr style={{ border: '.5px #E0E0E0 solid' }} />
-      <Option red={true} href='/profile'>
+      <Option onClick={logout} red={true} href='/profile'>
         <span className='material-icons'>logout</span>
         <p>Logout</p>
       </Option>
