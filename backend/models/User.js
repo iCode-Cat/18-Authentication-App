@@ -31,7 +31,8 @@ const UserSchema = new mongoose.Schema({
   },
   profile_img: {
     type: String,
-    default: null,
+    default:
+      'https://www.pngarea.com/pngm/676/4747761_default-image-png-default-profile-picture-transparent-hd.png',
   },
   createdAt: {
     type: String,

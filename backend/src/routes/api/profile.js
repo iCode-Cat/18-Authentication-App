@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
 // @router /api/user/profile
 // @desc Update authenticated user's profile
 router.post('/', async (req, res) => {
-  console.log(req.user);
-
+  // Get User's updated state
+  const { updated } = req.body;
   if (req.user === undefined) {
     return res
       .status(404)
@@ -24,12 +24,9 @@ router.post('/', async (req, res) => {
   try {
     const { _id } = req.user;
     // Update with the given credentials
-    const object = {
-      name: 'JUJU',
-      phone: 121212,
-    };
+
     // Find user by userid
-    const user = await User.updateOne({ _id }, { ...object });
+    const user = await User.updateOne({ _id }, { ...updated });
     res.status(200).send('User Profile Updated Successfully');
   } catch (error) {
     console.log(error.message);

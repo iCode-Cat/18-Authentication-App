@@ -10,9 +10,7 @@ const Profile = () => {
   const [profile, setProfile] = useState([
     {
       field: 'PHOTO',
-      value:
-        profile_img ||
-        'https://www.pngarea.com/pngm/676/4747761_default-image-png-default-profile-picture-transparent-hd.png',
+      value: profile_img,
     },
     {
       field: 'NAME',

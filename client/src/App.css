@@ -16,9 +16,10 @@ html {
   font-size: 62.5%;
 }
 
-button, input {
+button, input, textarea {
   outline: none;
   border: none;
+  resize: none;
 }
 
 a {
