@@ -11,8 +11,9 @@ const Register = () => {
     const { email, password } = form;
 
     try {
+      axios.defaults.withCredentials = true;
       const post = await axios.post(
-        'http://localhost:3001/auth/local/register',
+        'https://authentication-appp.herokuapp.com/auth/local/register',
         {
           username: email,
           password,
@@ -21,10 +22,14 @@ const Register = () => {
       );
       console.log(post.data);
       // After successful register redirect to login page
-      //   history.push('/login');
+      history.push('/login');
     } catch (error) {
       console.log(error.response.data);
     }
+  };
+
+  const submitSocialMedia = async (method) => {
+    window.location.href = `https://authentication-appp.herokuapp.com/auth/${method}`;
   };
 
   const formStateHandler = ({ field, value }) => {
@@ -76,10 +81,22 @@ const Register = () => {
 
       <p className={style.desc_small}>or continue with these social profile</p>
       <div className={style.icons}>
-        <i className='fab fa-google'></i>
-        <i className='fab fa-facebook-square'></i>
-        <i className='fab fa-twitter'></i>
-        <i className='fab fa-github'></i>
+        <i
+          className='fab fa-google'
+          onClick={() => submitSocialMedia('google')}
+        ></i>
+        <i
+          className='fab fa-facebook-square'
+          onClick={() => submitSocialMedia('facebook')}
+        ></i>
+        <i
+          className='fab fa-twitter'
+          onClick={() => submitSocialMedia('twitter')}
+        ></i>
+        <i
+          className='fab fa-github'
+          onClick={() => submitSocialMedia('github')}
+        ></i>
       </div>
       <p className={style.desc_small}>
         Adready a member?

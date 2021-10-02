@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../../models/User');
+const bcrypt = require('bcryptjs');
 
 // @router /api/user/profile
 // @desc Get authenticated user's profile
@@ -25,6 +26,16 @@ router.post('/', async (req, res) => {
     const { _id } = req.user;
     // Update with the given credentials
 
+    // Save new password as crypted
+    if (updated.password) {
+      const password = updated.password;
+      // hash the password
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(password, salt);
+      updated.password = hash;
+    }
+
+    console.log(updated);
     // Find user by userid
     const user = await User.updateOne({ _id }, { ...updated });
     res.status(200).send('User Profile Updated Successfully');

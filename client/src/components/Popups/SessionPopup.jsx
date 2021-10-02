@@ -56,7 +56,7 @@ const SessionPopup = () => {
         </Option>
       </Link>
       <hr style={{ border: '.5px #E0E0E0 solid' }} />
-      <Option onClick={logout} red={true} href='/profile'>
+      <Option onClick={logout} red={true} href='/login'>
         <span className='material-icons'>logout</span>
         <p>Logout</p>
       </Option>

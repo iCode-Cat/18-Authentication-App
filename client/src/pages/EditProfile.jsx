@@ -173,7 +173,7 @@ const EditProfile = () => {
     }
     try {
       const fetch = await axios.post(
-        'http://localhost:3001/api/user/profile',
+        'https://authentication-appp.herokuapp.com/api/user/profile',
         { updated: profile },
         {
           withCredentials: true,
@@ -210,7 +210,7 @@ const EditProfile = () => {
           <SubTitle>Changes will be reflected to every services</SubTitle>
           <ImageContainer>
             <Image src={profile_img} alt='profile' />
-            <span className='material-icons changeIcon'>photo_camera</span>
+            {/* <span className='material-icons changeIcon'>photo_camera</span> */}
           </ImageContainer>
 
           {/* Textarea inputs */}

@@ -8,10 +8,13 @@ const initialState = {
 
 export const fetchUser = createAsyncThunk('api/user/profile', async () => {
   try {
-    const fetch = await axios.get('http://localhost:3001/api/user/profile', {
-      withCredentials: true,
-    });
-    return fetch.data;
+    const get = await axios(
+      'https://authentication-appp.herokuapp.com/api/user/profile',
+      {
+        withCredentials: true,
+      }
+    );
+    return get.data;
   } catch (error) {
     console.log(error);
   }

@@ -12,24 +12,33 @@ const Login = ({}) => {
     const { email, password } = form;
 
     try {
-      const post = await axios.post(
-        'http://localhost:3001/auth/local/login',
+      axios.defaults.withCredentials = true;
+      const post = await fetch(
+        'https://authentication-appp.herokuapp.com/auth/local/login',
         {
-          username: email,
-          password,
-        },
-        { withCredentials: true }
+          method: 'post',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: email,
+            password,
+          }),
+          credentials: 'include',
+        }
       );
+      console.log(post);
       history.push('/profile');
       // After successful register redirect to login page
       //   history.push('/login');
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
     }
   };
 
   const submitSocialMedia = async (method) => {
-    window.location.href = `http://localhost:3001/auth/${method}`;
+    window.location.href = `https://authentication-appp.herokuapp.com/auth/${method}`;
   };
 
   const formStateHandler = ({ field, value }) => {

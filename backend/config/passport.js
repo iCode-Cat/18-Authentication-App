@@ -34,7 +34,8 @@ module.exports = function (passport) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: '/auth/google/callback',
+        callbackURL:
+          'https://authentication-appp.herokuapp.com/auth/google/callback',
       },
       async (accessToken, refreshToken, profile, done) => {
         const userObject = new User({
@@ -62,7 +63,8 @@ module.exports = function (passport) {
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: '/auth/github/callback',
+        callbackURL:
+          'https://authentication-appp.herokuapp.com/auth/github/callback',
       },
       async (accessToken, refreshToken, profile, done) => {
         const userObject = new User({
@@ -91,7 +93,8 @@ module.exports = function (passport) {
       {
         consumerKey: process.env.TWITTER_CONSUMER_KEY,
         consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-        callbackURL: '/auth/twitter/callback',
+        callbackURL:
+          'https://authentication-appp.herokuapp.com/auth/twitter/callback',
       },
       async (token, tokenSecret, profile, done) => {
         console.log(profile.id);
