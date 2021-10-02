@@ -21,16 +21,6 @@ require('../config/passport')(passport);
 // Middleware settings
 
 // CORS (Cross-Origin Resource Sharing)' headers to support Cross-site HTTP requests
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control'
-  );
-  next();
-});
 
 const store = new MongoDBStore({
   uri: process.env.MONGO_URI,
@@ -43,6 +33,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
+    proxy: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7,
       sameSite: 'none',

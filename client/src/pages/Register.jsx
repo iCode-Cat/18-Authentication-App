@@ -85,10 +85,10 @@ const Register = () => {
           className='fab fa-google'
           onClick={() => submitSocialMedia('google')}
         ></i>
-        <i
+        {/* <i
           className='fab fa-facebook-square'
           onClick={() => submitSocialMedia('facebook')}
-        ></i>
+        ></i> */}
         <i
           className='fab fa-twitter'
           onClick={() => submitSocialMedia('twitter')}

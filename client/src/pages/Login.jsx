@@ -13,22 +13,13 @@ const Login = ({}) => {
 
     try {
       axios.defaults.withCredentials = true;
-      const post = await fetch(
+      const post = await axios.post(
         'https://authentication-appp.herokuapp.com/auth/local/login',
-        {
-          method: 'post',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: email,
-            password,
-          }),
-          credentials: 'include',
-        }
+        { username: email, password },
+        { withCredentials: true }
       );
-      console.log(post);
+
+      console.log(post.data);
       history.push('/profile');
       // After successful register redirect to login page
       //   history.push('/login');
@@ -88,10 +79,10 @@ const Login = ({}) => {
           className='fab fa-google'
           onClick={() => submitSocialMedia('google')}
         ></i>
-        <i
+        {/* <i
           className='fab fa-facebook-square'
           onClick={() => submitSocialMedia('facebook')}
-        ></i>
+        ></i> */}
         <i
           className='fab fa-twitter'
           onClick={() => submitSocialMedia('twitter')}
